@@ -1,0 +1,16 @@
+{
+  "name": "admin-role-dashboard",
+  "private": true,
+  "workspaces": [
+    "api",
+    "web"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm:dev:*\"",
+    "dev:api": "npm --workspace api run dev",
+    "dev:web": "npm --workspace web run dev"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  }
+}
