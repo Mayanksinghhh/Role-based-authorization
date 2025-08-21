@@ -3,7 +3,7 @@
 A minimal reference project demonstrating:
 - JWT auth with roles (admin, editor, viewer)
 - API authorization middleware in Express
-- Next.js frontend with client-side guards and conditional UI
+- Next.js frontend with client-side guards and conditional UI and little bit of UI decoration
 - MongoDB (Mongoose) models for Users, Posts, and Logs
 
 ## Quickstart
@@ -11,33 +11,36 @@ A minimal reference project demonstrating:
 1) Prereqs: Node 18+, MongoDB running (local or Atlas).  
 2) Copy env examples and fill values:
 
-   ```bash
-   cp api/.env.example api/.env
-   cp web/.env.example web/.env
-   ```
+     api/.env--
+    MONGODB_URI=mongodb+srv://dummyUser:DummyPassword@cluster0.ukqx0fm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+    JWT_SECRET=dummy-SecretJWT
+    CLIENT_ORIGIN=http://localhost:3000
+    PORT=4000
 
-3) Install deps and run both apps:
+     web/.env
+    NEXT_PUBLIC_API_BASE=http://localhost:4000
 
-   ```bash
-   npm install --workspaces
+
+
+4) Install deps and run both apps:
+
+   npm install --workspaces 
    npm run dev
-   ```
 
    - API runs on http://localhost:4000
    - Web runs on http://localhost:3000
 
-4) Create some users (you can use the register route or the seed script):
+5) Create some users (you can use the register route or the seed script):
+   --Using register route--
+   Use any client like hopscotch or postman and enter URL - http://localhost:4000/auth/register
+   Body for user 
+   {"name":"Mayank singh","email":"mayankkr0077@gmail.com","password":"mayank123","role":"viewer"}
+   Body for admin 
+   {"name":"Mayank singh","email":"mayankkr0077@gmail.com","password":"mayank123","role":"admin"}
+   Body for editor 
+   {"name":"Mayank singh","email":"mayankkr0077@gmail.com","password":"mayank123","role":"editor"}
 
-   ```bash
-   # Register an admin
-   curl -X POST http://localhost:4000/auth/register -H "Content-Type: application/json"          -d '{"name":"Admin","email":"admin@example.com","password":"admin123","role":"admin"}'
-   # Register an editor
-   curl -X POST http://localhost:4000/auth/register -H "Content-Type: application/json"          -d '{"name":"Ed","email":"editor@example.com","password":"editor123","role":"editor"}'
-   # Register a viewer
-   curl -X POST http://localhost:4000/auth/register -H "Content-Type: application/json"          -d '{"name":"View","email":"viewer@example.com","password":"viewer123","role":"viewer"}'
-   ```
-
-5) Login from the web UI at `/login` with one of the accounts above.
+6) Login from the web UI at `/login` with one of the accounts above.
    The API sets an HttpOnly cookie; the frontend calls authenticated endpoints with `credentials: 'include'`.
 
 ## Notes
